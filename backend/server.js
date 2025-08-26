@@ -1,42 +1,48 @@
-import express from "express"
-import cors from "cors"
-import { connectDB } from "./config/db.js"
-import foodRouter from "./routes/foodRoute.js"
-import userRouter from "./routes/userRoute.js"
-import cartRouter from "./routes/cartRoute.js"
-import 'dotenv/config.js'
-import orderRouter from "./routes/orderRoute.js"
+import express from "express";
+import cors from "cors";
+import { connectDB } from "./config/db.js";
+import foodRouter from "./routes/foodRoute.js";
+import userRouter from "./routes/userRoute.js";
+import cartRouter from "./routes/cartRoute.js";
+import "dotenv/config.js";
+import orderRouter from "./routes/orderRoute.js";
 
+const app = express();
+const port = process.env.PORT || 4000;
 
+// Allowed domains for frontend and admin
+const allowedOrigins = [
+  "https://tomato-frontend-aaf0.onrender.com", // main frontend
+  "https://tomato-admin-p0gm.onrender.com",    // admin panel
+  "http://localhost:5173",                     // local frontend
+  "http://localhost:5174"                      // local admin
+];
 
-//app config
-const app=express()
-const port= process.env.PORT || 4000;
+app.use(express.json());
 
-// middleware
+// Enable CORS with allowed origins
+app.use(
+  cors({
+    origin: allowedOrigins,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 
-app.use(express.json()) //front request -> backend
-app.use(cors()) //access backend from any frontend
-//db connection
+// Connect to database
 connectDB();
 
-//api endpoints
+// API routes
+app.use("/api/food", foodRouter);
+app.use("/images", express.static("uploads"));
+app.use("/api/user", userRouter);
+app.use("/api/cart", cartRouter);
+app.use("/api/order", orderRouter);
 
-app.use("/api/food",foodRouter)
-app.use("/images",express.static('uploads'))
-app.use("/api/user",userRouter)
-app.use("/api/cart",cartRouter)
-app.use("/api/order",orderRouter)
+app.get("/", (req, res) => {
+  res.send("API Working");
+});
 
-
-
-app.get("/",(req,res)=>{       //request data from server
-    res.send("API Working")
-})
-
-app.listen(port,()=>{
-    console.log(`Server Started on http://localhost:${port}`)
-})
-
-
-// 
+app.listen(port, () => {
+  console.log(`Server Started on http://localhost:${port}`);
+});
