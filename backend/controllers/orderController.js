@@ -138,7 +138,7 @@ const updateStatus = async(req,res) => {
 
 // Place Cash on Delivery (COD) order
 const placeCODOrder = async (req, res) => {
-  const frontend_url = process.env.FRONTEND_URL || "http://localhost:5173";
+  const frontend_url = process.env.FRONTEND_URL || "https://tomato-frontend-aaf0.onrender.com";
   try {
     const userId = req.body.userId;
     const newOrder = new orderModel({
