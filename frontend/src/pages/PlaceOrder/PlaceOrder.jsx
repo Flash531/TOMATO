@@ -4,7 +4,7 @@ import './PlaceOrder.css'
 import { useNavigate } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext'
 
-const url = "http://localhost:4000";
+const url = "https://tomato-backend-0hap.onrender.com";
 
 
 
