@@ -7,7 +7,7 @@
 **TOMATO** is a complete food delivery platform designed to provide a seamless ordering experience — from browsing and adding items to the cart, to secure checkout and order tracking.  
 Built using **React.js, Node.js, Express, and MongoDB**, with **Stripe** integrated for smooth and secure payment handling.  
 
-🔗 **Live Project:** [Deployed Link](#)  
+🔗 **Live Project:** [https://tomato-frontend-aaf0.onrender.com](#)  
 💻 **Tech Stack:** MERN (MongoDB, Express, React, Node.js) + Stripe API  
 
 ---
